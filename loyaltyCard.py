@@ -1,14 +1,14 @@
 cardDetails = input("Welcome to the Jewelery Website. Please input your voucher code: ")
 
-def dateCheck(): #Checks the date
-    from datetime import date #import datetime protocol
+def dateCheck(): #Check the date
+    import datetime #import datetime protocol
     day = input('Please input the day of the month the card is valid from ') #Input day
     month = input('Please input the month of the year the card is valid from ') #Input month
     year = input('Please input the year the card is valid from ') #Input year
-    expiryDate = date(year, month, day)
-    today = date.today() #gets current date
-    # if today is less than the expirary date
-    if today < expiryDate:
+    today = datetime.date.today() #Checks Current date
+    margin = datetime.timedelta(days=365) #Margin of days (year)
+    # if today - 365 is less then or equal to inputted year, month & day
+    if today - margin <= datetime.date(int(year), int(month), int(day)) <= today + margin:
         print("That is a valid date")
     else:
         print("This is an invalid date")
