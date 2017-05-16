@@ -1,12 +1,12 @@
-#name = input('Please input the customers name')
-#postcode = input('Please input the customers postcode')
 cardDetails = input("Please input the card number: ")
 
-def dateCheck(): #Check the date
-    import datetime #import datetime protocol
-    day = input('Please input the day the card is valid from ') #Input day
+def dateCheck():  # Check the date
+    import datetime  # import datetime protocol
+    day = input('Please input the day the card is valid from ')  # Input day
     try:
-        day = int(day) and int(day) >=1 and int(day) <=31
+        day = int(day)
+        if True and int(day) >= 1 and int(day) <= 31:
+            day = int(day)
     except ValueError:
         day = input("That was an invalid day. Please try again ")
     #########################################################################
@@ -20,25 +20,33 @@ def dateCheck(): #Check the date
             "Mar": 3,
             "Apr": 4,
             "May": 5,
-            "Jun": 6, 
+            "Jun": 6,
             "Jul": 7,
             "Aug": 8,
             "Sep": 9,
-            "Oct":10,
-            "Nov":11,
-            "Dec":12
-            } 
-        month =(monthConversion[month[0:3].lower().title()])
-        
+            "Oct": 10,
+            "Nov": 11,
+            "Dec": 12
+        }
+        month = (monthConversion[month[0:3].lower().title()])
+
     #############################################################################
-    year = input('Please input the year the card is valid from (YYYY)') #Input year
-    today = datetime.date.today() #Checks Current date
-    margin = datetime.timedelta(days=365) #Margin of days (year)
-    # if today - 365 is less then or equal to inputted year, month & day
-    if today - margin <= datetime.date(int(year), int(month), int(day)) <= today + margin:
-        print("That is a valid date")
+    year = input('Please input the year the card is valid from (YYYY)')  # Input year
+    ###########################################################################
+    from datetime import date
+    today = date.today()
+    card = date(int(year), int(month), int(day))
+    dif = today - card
+    print (dif.days)
+
+    if (dif.days < 0):
+        print ("Date cannot be in the future.")
+    elif (dif.days > 365):
+        print ("The card has expired.")
+    elif (dif.days <= 365):
+        print ("The card is valid.")
     else:
-        print("This is an invalid date")
+        print ("An error has occured.")
 
 def lengthCardDetails(cardDetails):
     exitCode = ('end')
@@ -102,11 +110,13 @@ def voucherCode(cardDetails):
     #############################################################
     addedUp = digitOne + digitTwo + digitThree + digitFour + digitFive + digitSix + digitSeven + int(checkDigit)
     print(str(addedUp))
-    if int(addedUp)%10 ==0 :
+    if int(addedUp) % 10 == 0:
         print('This is a valid number')
     else:
         print("This is invalid")
 
+
 dateCheck()
 lengthCardDetails(cardDetails)
 voucherCode(cardDetails)
+
