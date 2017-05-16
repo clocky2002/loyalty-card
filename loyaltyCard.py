@@ -16,7 +16,6 @@ def dateCheck(): #Check the date
     except ValueError:
         monthConversion = {
             "Jan": 1,
-            "January": 1,
             "Feb": 2,
             "Mar": 3,
             "Apr": 4,
@@ -29,7 +28,7 @@ def dateCheck(): #Check the date
             "Nov":11,
             "Dec":12
             } 
-        month =(monthConversion[month])
+        month =(monthConversion[month[0:3].lower().title()])
         
     #############################################################################
     year = input('Please input the year the card is valid from (YYYY)') #Input year
