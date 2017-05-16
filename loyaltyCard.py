@@ -107,8 +107,14 @@ def voucherCode(cardDetails):
     digitFive = int(digitList[4])
     digitSix = int(digitList[5])
     digitSeven = int(digitList[6])
-    #############################################################
+    
     addedUp = digitOne + digitTwo + digitThree + digitFour + digitFive + digitSix + digitSeven + int(checkDigit)
+    
+    ## Other way to do it
+    addedUp = 0;
+    for number in digitList:
+        addedUp += number # You int() the numbers when you added them to digitList - line 70
+    #############################################################
     print(str(addedUp))
     if int(addedUp) % 10 == 0:
         print('This is a valid number')
