@@ -1,34 +1,49 @@
+import datetime  # import datetime module
+
+validDay = False
+validMonth = False
+validYear = False
+
 cardDetails = input("Please input the card number: ")
 
-def dateCheck():  # Check the date
-    import datetime  # import datetime protocol
-    day = input('Please input the day the card is valid from ')  # Input day
-    try:
-        day = int(day)
-        if True and int(day) >= 1 and int(day) <= 31:
+def dateCheck():
+    day = input('Please input the day the card is valid from ')
+    #Keeps asking until there is a valid day
+    while validDay == False:
+        try:
             day = int(day)
-    except ValueError:
-        day = input("That was an invalid day. Please try again ")
+            if !(day >= 1 and day <= 31):
+                day = input("That was an invalid day. Please try again ")
+            else:
+                validDay = True
+        except ValueError:
+            day = input("That was an invalid day. Please try again ")
     #########################################################################
     month = input('Please input the month the card is valid from ')
-    try:
-        month = int(month)
-    except ValueError:
-        monthConversion = {
-            "Jan": 1,
-            "Feb": 2,
-            "Mar": 3,
-            "Apr": 4,
-            "May": 5,
-            "Jun": 6,
-            "Jul": 7,
-            "Aug": 8,
-            "Sep": 9,
-            "Oct": 10,
-            "Nov": 11,
-            "Dec": 12
-        }
-        month = (monthConversion[month[0:3].lower().title()])
+    #Keeps asking until there is a valid month
+    while validMonth == False:
+        try:
+            month = int(month)
+        except ValueError:
+            monthConversion = {
+                "Jan": 1,
+                "Feb": 2,
+                "Mar": 3,
+                "Apr": 4,
+                "May": 5,
+                "Jun": 6,
+                "Jul": 7,
+                "Aug": 8,
+                "Sep": 9,
+                "Oct": 10,
+                "Nov": 11,
+                "Dec": 12
+            }
+            month = monthConversion[month[0:3].lower().title()]
+            if !(month >= 1 and month <=12):
+                month = month = input('Please input the month the card is valid from ')
+            else:
+                validMonth = True
 
     #############################################################################
     year = input('Please input the year the card is valid from (YYYY)')  # Input year
@@ -98,4 +113,3 @@ def voucherCode(cardDetails):
 dateCheck()
 lengthCardDetails(cardDetails)
 voucherCode(cardDetails)
-
