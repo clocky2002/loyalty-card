@@ -42,7 +42,7 @@ def dateCheck():
             month = monthConversion[month[0:3].lower().title()]
             
         if !(month >= 1 and month <=12):
-            month = month = input('Please input the month the card is valid from ')
+            month = input('Please input the month the card is valid from ')
         else:
             validMonth = True
 
