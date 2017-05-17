@@ -55,65 +55,37 @@ def lengthCardDetails(cardDetails):
             cardDetails = int(cardDetails)
         except ValueError:
             cardDetails = input("That was an invalid code. Please try again or to exit, type end: ")
-            if cardDetails == exitCode or upper.exitCode() or lower.exitCode() or title.exitCode():
+            if cardDetails.lower == exitCode:
                 print('You have exited the program')
                 exit()
     else:
         cardDetails = input("That was an invalid code. Please try again or to exit, type end: ")
-        if cardDetails == exitCode or upper.exitCode() or lower.exitCode() or title.exitCode():
+        if cardDetails.lower == exitCode:
             print('You have exited the program')
             exit()
         else:
             lengthCardDetails(cardDetails)
 
+# Code was duplicated so made it a function
+def digitChange(digit):
+    digit = digit * 2
+    if digit > 9:
+        digit = digit - 9
+    print(digit)
+    return digit
+    
 def voucherCode(cardDetails):
-    digitList = [int(i) for i in str(cardDetails)]
+    digitList = [int(i) for i in cardDetails]
     checkDigit = digitList.pop(7)
     digitList = digitList[::-1]
     print(digitList)
     ############################################################
-    digitOne = digitList[0]
-    digitOne = int(digitOne) * 2
-    if int(digitOne) > 9:
-        digitOne = digitOne - 9
-    digitList[0] = digitOne
-    print(digitList)
-    #############################################################
-    digitThree = digitList[2]
-    digitThree = int(digitThree) * 2
-    if int(digitThree) > 9:
-        digitThree = digitThree - 9
-    digitList[2] = digitThree
-    print(digitList)
-    #############################################################
-    digitFive = digitList[4]
-    digitFive = int(digitFive) * 2
-    if int(digitFive) > 9:
-        digitFive = digitFive - 9
-    digitList[4] = digitFive
-    print(digitList)
-    #############################################################
-    digitSeven = digitList[6]
-    digitSeven = int(digitSeven) * 2
-    if int(digitSeven) > 9:
-        digitSeven = digitSeven - 9
-    digitList[6] = digitSeven
-    print(digitList)
-    #############################################################
-    digitOne = int(digitList[0])
-    digitTwo = int(digitList[1])
-    digitThree = int(digitList[2])
-    digitFour = int(digitList[3])
-    digitFive = int(digitList[4])
-    digitSix = int(digitList[5])
-    digitSeven = int(digitList[6])
-    
-    addedUp = digitOne + digitTwo + digitThree + digitFour + digitFive + digitSix + digitSeven + int(checkDigit)
-    
-    ## Other way to do it
+    for i in range(0,7,2): # Starting at 0, ending at 6, adding 2 each time
+        digitList[i] = digitChange(digitList[i])
+    #############################################################   
     addedUp = 0;
     for number in digitList:
-        addedUp += number # You int() the numbers when you added them to digitList - line 70
+        addedUp += number
     addedUp += checkDigit
     #############################################################
     print(str(addedUp))
