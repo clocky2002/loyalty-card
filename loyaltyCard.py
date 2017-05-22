@@ -1,19 +1,20 @@
 import datetime  # import datetime module
 
-validDay = False
-validMonth = False
-validYear = False
-
 cardDetails = input("Please input the card number: ")
 
 def dateCheck():
+    
+    validDay = False
+    validMonth = False
+    validYear = False
+    
     day = input('Please input the day the card is valid from ')
     #Keeps asking until there is a valid day
-    while validDay == False:
+    while (validDay == False):
         try:
             day = int(day)
-            if !(day >= 1 and day <= 31):
-                day = input("That was an invalid day. Please try again ")
+            if not (day >= 1 and day <= 31):
+                day = int(input("That was an invalid day. Please try again "))
             else:
                 validDay = True
         except ValueError:
@@ -41,7 +42,7 @@ def dateCheck():
             }
             month = monthConversion[month[0:3].lower().title()]
             
-        if !(month >= 1 and month <=12):
+        if not (month >= 1 and month <=12):
             month = input('Please input the month the card is valid from ')
         else:
             validMonth = True
