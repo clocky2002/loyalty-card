@@ -1,4 +1,4 @@
-import datetime  # import datetime module
+from datetime import date  # import datetime module
 
 cardDetails = input("Please input the card number: ")
 
@@ -50,7 +50,6 @@ def dateCheck():
     #############################################################################
     year = input('Please input the year the card is valid from (YYYY)')  # Input year
     ###########################################################################
-    from datetime import date
     today = date.today()
     card = date(int(year), int(month), int(day))
     dif = today - card
