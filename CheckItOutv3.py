@@ -21,6 +21,7 @@ btnSubmit.pack()
 
 
 def dateCheck():
+    # Validation
     validDay = False
     validMonth = False
     validYear = False
