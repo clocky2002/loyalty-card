@@ -1,4 +1,4 @@
-import datetime  # import datetime module
+from datetime import date  # import datetime module
 
 cardDetails = input("Please input the card number: ")
 
@@ -8,6 +8,7 @@ def dateCheck():
     validMonth = False
     validYear = False
     
+    ##########################################################################
     day = input('Please input the day the card is valid from ')
     #Keeps asking until there is a valid day
     while (validDay == False):
@@ -19,6 +20,7 @@ def dateCheck():
                 validDay = True
         except ValueError:
             day = input("That was an invalid day. Please try again ")
+            
     #########################################################################
     month = input('Please input the month the card is valid from ')
     #Keeps asking until there is a valid month
@@ -48,9 +50,18 @@ def dateCheck():
             validMonth = True
 
     #############################################################################
-    year = input('Please input the year the card is valid from (YYYY)')  # Input year
+    year = input('Please input the year the card in the valid form (YYYY)')  # Input year
+    while validYear == False:
+        if len(year) == 4:
+            try:
+                year = int(year)
+                validYear = True
+            except ValueError:
+                year = input('Please input the year the card in the valid form (YYYY)') 
+        else:
+            year = input('Please input the year the card in the valid form (YYYY)') 
+ 
     ###########################################################################
-    from datetime import date
     today = date.today()
     card = date(int(year), int(month), int(day))
     dif = today - card
@@ -66,22 +77,20 @@ def dateCheck():
         print ("An error has occured.")
 
 def lengthCardDetails(cardDetails):
-    exitCode = ('end')
-    if len(cardDetails) == 8:
-        try:
-            cardDetails = int(cardDetails)
-        except ValueError:
-            cardDetails = input("That was an invalid code. Please try again or to exit, type end: ")
-            if cardDetails.lower == exitCode:
+    validCardNumber = False
+    exitCode = 'end'
+    
+    # Continues asking for a valid card number or the exit code until either is entered
+    while validCardNumber == False:
+        if len(cardDetails) == 8:
+            try:
+                cardDetails = int(cardDetails)
+                validCardNumber = True
+            except ValueError:
+                cardDetails = input("That was an invalid code. Please try again or to exit, type end: ")
+        else if cardDetails.lower == exitCode:
                 print('You have exited the program')
                 exit()
-    else:
-        cardDetails = input("That was an invalid code. Please try again or to exit, type end: ")
-        if cardDetails.lower == exitCode:
-            print('You have exited the program')
-            exit()
-        else:
-            lengthCardDetails(cardDetails)
 
 # Code was duplicated so made it a function
 def digitChange(digit):
@@ -98,7 +107,7 @@ def voucherCode(cardDetails):
     print(digitList)
     ############################################################
     for i in range(0,7,2): # Starting at 0, ending at 6, iterating over every other digit
-        digitList[i] = digitChange(digitList[i]) # Refering to the digitChange() defined on line 87
+        digitList[i] = digitChange(digitList[i])
     #############################################################   
     addedUp = 0;
     for number in digitList:
