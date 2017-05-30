@@ -8,16 +8,46 @@ window.geometry("500x500")
 #window.wm_iconbitmap('card.ico')
 
 ## Window element decleration
-theLabel = Label(window, text="test")
 topFrame = Frame(window)
 bottomFrame = Frame(window)
+
+lblTitle = Label(window, text="test")
+
+## lbl = label
+## txt = textbox
+## btn = button
+
+#lblCardNo
+#txtCardNo
+#lblDay
+#txtDay
+#lblMonth
+#txtMonth
+#lblYear
+#txtYear
+
+##This will be the label where you display all the errors which you want to output to the user.
+##It's easier to create a label for it and then change the text of the label within a function.
+##The fuction would be a simple one which took a string and the function would display that onto the window.
+#lblError
+
 btnSubmit = Button(bottomFrame, text="Submit")
 
-## Layout of Window
-theLabel.pack()
+
+## Layout of Window - list them in the order on the window, makes life easier later
 topFrame.pack()
-bottomFrame.pack(side=BOTTOM)
+lblTitle.pack()
+#lblError
+#lblCardNo
+#txtCardNo
+#lblDay
+#txtDay
+#lblMonth
+#txtMonth
+#lblYear
+#txtYear
 btnSubmit.pack()
+bottomFrame.pack(side=BOTTOM)
 
 
 def dateCheck():
