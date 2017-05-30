@@ -97,8 +97,8 @@ def voucherCode(cardDetails):
     digitList = digitList[::-1]
     print(digitList)
     ############################################################
-    for i in range(0,7,2): # Starting at 0, ending at 6, adding 2 each time
-        digitList[i] = digitChange(digitList[i])
+    for i in range(0,7,2): # Starting at 0, ending at 6, iterating over every other digit
+        digitList[i] = digitChange(digitList[i]) # Refering to the digitChange() defined on line 87
     #############################################################   
     addedUp = 0;
     for number in digitList:
