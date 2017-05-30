@@ -1,34 +1,51 @@
+import datetime  # import datetime module
+
 cardDetails = input("Please input the card number: ")
 
-def dateCheck():  # Check the date
-    import datetime  # import datetime protocol
-    day = input('Please input the day the card is valid from ')  # Input day
-    try:
-        day = int(day)
-        if True and int(day) >= 1 and int(day) <= 31:
+def dateCheck():
+    
+    validDay = False
+    validMonth = False
+    validYear = False
+    
+    day = input('Please input the day the card is valid from ')
+    #Keeps asking until there is a valid day
+    while (validDay == False):
+        try:
             day = int(day)
-    except ValueError:
-        day = input("That was an invalid day. Please try again ")
+            if not (day >= 1 and day <= 31):
+                day = int(input("That was an invalid day. Please try again "))
+            else:
+                validDay = True
+        except ValueError:
+            day = input("That was an invalid day. Please try again ")
     #########################################################################
     month = input('Please input the month the card is valid from ')
-    try:
-        month = int(month)
-    except ValueError:
-        monthConversion = {
-            "Jan": 1,
-            "Feb": 2,
-            "Mar": 3,
-            "Apr": 4,
-            "May": 5,
-            "Jun": 6,
-            "Jul": 7,
-            "Aug": 8,
-            "Sep": 9,
-            "Oct": 10,
-            "Nov": 11,
-            "Dec": 12
-        }
-        month = (monthConversion[month[0:3].lower().title()])
+    #Keeps asking until there is a valid month
+    while validMonth == False:
+        try:
+            month = int(month)
+        except ValueError:
+            monthConversion = {
+                "Jan": 1,
+                "Feb": 2,
+                "Mar": 3,
+                "Apr": 4,
+                "May": 5,
+                "Jun": 6,
+                "Jul": 7,
+                "Aug": 8,
+                "Sep": 9,
+                "Oct": 10,
+                "Nov": 11,
+                "Dec": 12
+            }
+            month = monthConversion[month[0:3].lower().title()]
+            
+        if not (month >= 1 and month <=12):
+            month = input('Please input the month the card is valid from ')
+        else:
+            validMonth = True
 
     #############################################################################
     year = input('Please input the year the card is valid from (YYYY)')  # Input year
@@ -55,65 +72,37 @@ def lengthCardDetails(cardDetails):
             cardDetails = int(cardDetails)
         except ValueError:
             cardDetails = input("That was an invalid code. Please try again or to exit, type end: ")
-            if cardDetails == exitCode or upper.exitCode() or lower.exitCode() or title.exitCode():
+            if cardDetails.lower == exitCode:
                 print('You have exited the program')
                 exit()
     else:
         cardDetails = input("That was an invalid code. Please try again or to exit, type end: ")
-        if cardDetails == exitCode or upper.exitCode() or lower.exitCode() or title.exitCode():
+        if cardDetails.lower == exitCode:
             print('You have exited the program')
             exit()
         else:
             lengthCardDetails(cardDetails)
 
+# Code was duplicated so made it a function
+def digitChange(digit):
+    digit = digit * 2
+    if digit > 9:
+        digit = digit - 9
+    print(digit)
+    return digit
+    
 def voucherCode(cardDetails):
-    digitList = [int(i) for i in str(cardDetails)]
+    digitList = [int(i) for i in cardDetails]
     checkDigit = digitList.pop(7)
     digitList = digitList[::-1]
     print(digitList)
     ############################################################
-    digitOne = digitList[0]
-    digitOne = int(digitOne) * 2
-    if int(digitOne) > 9:
-        digitOne = digitOne - 9
-    digitList[0] = digitOne
-    print(digitList)
-    #############################################################
-    digitThree = digitList[2]
-    digitThree = int(digitThree) * 2
-    if int(digitThree) > 9:
-        digitThree = digitThree - 9
-    digitList[2] = digitThree
-    print(digitList)
-    #############################################################
-    digitFive = digitList[4]
-    digitFive = int(digitFive) * 2
-    if int(digitFive) > 9:
-        digitFive = digitFive - 9
-    digitList[4] = digitFive
-    print(digitList)
-    #############################################################
-    digitSeven = digitList[6]
-    digitSeven = int(digitSeven) * 2
-    if int(digitSeven) > 9:
-        digitSeven = digitSeven - 9
-    digitList[6] = digitSeven
-    print(digitList)
-    #############################################################
-    digitOne = int(digitList[0])
-    digitTwo = int(digitList[1])
-    digitThree = int(digitList[2])
-    digitFour = int(digitList[3])
-    digitFive = int(digitList[4])
-    digitSix = int(digitList[5])
-    digitSeven = int(digitList[6])
-    
-    addedUp = digitOne + digitTwo + digitThree + digitFour + digitFive + digitSix + digitSeven + int(checkDigit)
-    
-    ## Other way to do it
+    for i in range(0,7,2): # Starting at 0, ending at 6, iterating over every other digit
+        digitList[i] = digitChange(digitList[i]) # Refering to the digitChange() defined on line 87
+    #############################################################   
     addedUp = 0;
     for number in digitList:
-        addedUp += number # You int() the numbers when you added them to digitList - line 70
+        addedUp += number
     addedUp += checkDigit
     #############################################################
     print(str(addedUp))
@@ -126,4 +115,3 @@ def voucherCode(cardDetails):
 dateCheck()
 lengthCardDetails(cardDetails)
 voucherCode(cardDetails)
-
