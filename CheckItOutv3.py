@@ -1,29 +1,63 @@
 from datetime import date  # import datetime module
 from tkinter import *
 
+## Window declaration
 window = Tk()
 window.title("Check it out")
 window.geometry("500x500")
 #window.wm_iconbitmap('card.ico')
-theLabel = Label(window, text="test")
-theLabel.pack()
+
+## Window element decleration
 topFrame = Frame(window)
-topFrame.pack()
 bottomFrame = Frame(window)
+
+lblTitle = Label(window, text="test")
+
+## lbl = label
+## txt = textbox
+## btn = button
+
+#lblCardNo
+#txtCardNo
+#lblDay
+#txtDay
+#lblMonth
+#txtMonth
+#lblYear
+#txtYear
+
+##This will be the label where you display all the errors which you want to output to the user.
+##It's easier to create a label for it and then change the text of the label within a function.
+##The fuction would be a simple one which took a string and the function would display that onto the window.
+#lblError
+
+btnSubmit = Button(bottomFrame, text="Submit")
+
+
+## Layout of Window - list them in the order on the window, makes life easier later
+topFrame.pack()
+lblTitle.pack()
+#lblError
+#lblCardNo
+#txtCardNo
+#lblDay
+#txtDay
+#lblMonth
+#txtMonth
+#lblYear
+#txtYear
+btnSubmit.pack()
 bottomFrame.pack(side=BOTTOM)
-button1 = Button(bottomFrame, text="Submit")
-button1.pack()
-
-
-cardDetails = Entry(window, text="Please input the card number: ")
 
 
 def dateCheck():
+    # Validation
     validDay = False
     validMonth = False
     validYear = False
 
     ##########################################################################
+    
     day =  Entry(window, 'Please input the day the card is valid from ')
     # Keeps asking until there is a valid day
     while (validDay == False):
@@ -37,6 +71,7 @@ def dateCheck():
             day = Entry(window, "That was an invalid day. Please try again ")
 
     #########################################################################
+    
     month =  Entry(window,'Please input the month the card is valid from ')
     # Keeps asking until there is a valid month
     while validMonth == False:
@@ -65,6 +100,7 @@ def dateCheck():
             validMonth = True
 
     #############################################################################
+    
     year = input('Please input the year the card in the valid form (YYYY)')  # Input year
     while validYear == False:
         if len(year) == 4:
@@ -77,10 +113,10 @@ def dateCheck():
             year =  Entry(window,'Please input the year the card in the valid form (YYYY)')
 
             ###########################################################################
+            
     today = date.today()
     card = date(int(year), int(month), int(day))
     dif = today - card
-    print (dif.days)
 
     if (dif.days < 0):
         print ("Date cannot be in the future.")
@@ -108,7 +144,6 @@ def lengthCardDetails(cardDetails):
             print('You have exited the program')
             exit()
 
-
 # Code was duplicated so made it a function
 def digitChange(digit):
     digit = digit * 2
@@ -116,7 +151,6 @@ def digitChange(digit):
         digit = digit - 9
     print(digit)
     return digit
-
 
 def voucherCode(cardDetails):
     digitList = [int(i) for i in cardDetails]
@@ -138,8 +172,10 @@ def voucherCode(cardDetails):
     else:
         print("This is invalid")
 
-
+cardDetails = Entry(window, text="Please input the card number: ")
 dateCheck()
 lengthCardDetails(cardDetails)
 voucherCode(cardDetails)
+
+## Initialise window
 window.mainloop()
