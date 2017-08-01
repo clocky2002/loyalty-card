@@ -2,6 +2,9 @@
 import datetime
 from datetime import date
 
+cardDetails = ""
+dateValid = False
+
 name = input('What is your name? ')
 postCode = input('What is your postcode? ')
 
@@ -11,7 +14,6 @@ def cardNumber():
     valid = False
     while valid == False:
         try:
-            global cardDetails
             cardDetails = int(input("Please input the card number: "))
             if len(str(cardDetails)) == 8:
                 print ("Card number is eight digits long.")
@@ -91,8 +93,6 @@ def cardDate():
             print ("Error. Invalid entry.")
                    
 ##### calculate difference in days
-    global dateValid
-    dateValid = False 
     today = date.today()
     card = date(y,m,d)
     dif = today - card
